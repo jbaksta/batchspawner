@@ -12,7 +12,7 @@ class BatchSpawnerAPIHandler(APIHandler):
         data = self.get_json_body()
         port = int(data.get('port', 0))
         spawner = user.spawner
-        while not issubclass(spawner,BatchSpawnerBase):
+        while not issubclass(spawner.__class__,BatchSpawnerBase):
           spawner = spawner.child_spawner
         spawner.current_port = port
         self.finish(json.dumps({"message": "BatchSpawner port configured"}))
